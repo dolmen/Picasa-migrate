@@ -21,9 +21,9 @@ if (! -t 0) {
 
 my $section;
 
-foreach my $file (@files) {
-    open my $f, '<:crlf', $file or die "$file: $!";
-    my $dir = dirname($file);
+foreach my $ini (@files) {
+    open my $f, '<:crlf', $ini or die "$ini: $!";
+    my $dir = dirname($ini);
     $dir =~ s{^\./(?=.)}{};
 
     while (<$f>) {

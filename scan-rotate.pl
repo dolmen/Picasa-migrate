@@ -4,6 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
+use File::Basename;
 use JSON::XS;
 
 my @files = @ARGV;
@@ -20,6 +21,8 @@ my $section;
 
 foreach my $file (@files) {
     open my $f, '<:crlf', $file or die "$file: $!";
+    my $dir = dirname($file);
+    $dir =~ s{^\./(?=.)}{};
 
     while (<$f>) {
 	chomp;
@@ -32,7 +35,7 @@ foreach my $file (@files) {
 	    if ($name eq 'rotate' && $section =~ /\.JPG$/i) {
 		$value =~ /\((.*)\)$/ or die "unexpected rotate value '$value'";
 		my $angle = (360 + $1 * 90) % 360;
-		say "$angle $section";
+		say "$angle $dir/$section";
 	    } 
 	}
     }

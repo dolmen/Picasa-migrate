@@ -4,6 +4,8 @@ use 5.010;
 use strict;
 use warnings;
 
+use Term::Encoding;
+use open ':std', 'encoding('.Term::Encoding::get_encoding.')';
 use File::Basename;
 use JSON::XS;
 
